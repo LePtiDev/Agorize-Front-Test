@@ -1,4 +1,4 @@
-# Agorize test
+# Agorize test (2H45)
 
 ## How to run the project
 
