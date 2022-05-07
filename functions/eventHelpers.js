@@ -7,6 +7,7 @@ import {
 
 //======================================================================= Exports functions
 export function checkIfIsOpen(eventList, fromDate, toDate) {
+  // Variables
   const planning = eventList.find((event) => event.opening === true);
 
   // Check if reccuring planning
@@ -34,7 +35,7 @@ export function checkIfIsOpen(eventList, fromDate, toDate) {
 }
 
 export function checkIfIsAvailable(eventList, fromDate, toDate) {
-  const planning = eventList.find((event) => event.opening === true);
+  // Variables
   const events = eventList.filter((event) => event.opening === false);
 
   events.forEach((element) => {
@@ -52,7 +53,7 @@ export function checkIfIsAvailable(eventList, fromDate, toDate) {
 }
 
 export function getAvailabilities(eventList, fromDate, toDate) {
-  // Planing
+  // Variables
   const planning = eventList.find((el) => el.opening === true);
   const planningStartDate = planning.startDate;
   const planningEndDate = planning.endDate;
@@ -67,6 +68,7 @@ export function getAvailabilities(eventList, fromDate, toDate) {
     );
   }
 
+  // Set the date to
   planningEndDate.setDate(dateAvaibilities.getDate());
 
   while (dateAvaibilities.getTime() < planningEndDate.getTime()) {
