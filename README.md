@@ -1,31 +1,34 @@
-Le contexte
-========
-Nous construisons une méthode qui permettra aux entreprises (plombiers, ascenseurs, etc.) de gérer leurs interventions dans leur calendrier. Nous avons déjà des classes pour l'intervention et nous devons construire une méthode qui nous permettra de calculer toutes les fenêtres disponibles.
+# Agorize test
 
-Des classes
-========
-Les cours sont fournis mais ce n'est qu'une indication. Vous pouvez librement implémenter vos propres classes si le comportement souhaité est le même.
+## How to run the project
 
-## Événement
+I use node 17.9.0. If you want to lunch the projet make sure that you have the same version of Node.
 
-* Un événement est soit une fenêtre qui s'ouvre, soit une fenêtre occupée. Une fenêtre occupée signifie que l'entreprise a déjà une intervention prévue ou ne peut pas intervenir dans cette fenêtre spécifique.
-* Un événement d'ouverture peut être récurrent, c'est-à-dire qu'il se répète chaque semaine.
+```
+node main.js
+```
 
+## How i create it
 
-Exemple
-========
-Voici ce qui se passe dans le fichier main.js :
+I separate the code between two parts. The first one is the functions.
+This folder is the main point of my algorithm. In the files you file find function than you can
+use in the main file.
 
-Prenons une société qui s'appelle "Plomberie FAURE", elle met dans la plateforme qu'elle est habituellement disponible chaque semaine le vendredi de 10h30 à 14h00. Un habitant a programmé une intervention le vendredi 8 juillet de 11h30 à 12h30 avec elle. Un autre habitant souhaite savoir quand l'entreprise est disponible du 4 au 10 juillet. La réponse devrait être que l'entreprise est disponible le vendredi 8 juillet de 10h30 à 11h30 et de 12h30 à 14h00. Pour le test, nous supposerons que l'algorithme renvoie un tableau avec les fenêtres/emplacements disponibles dans le calendrier, comme décrit dans le fichier main.js.
+I create also a dateHelper who can help you to compare some dates and format it.
 
-Critère d'évaluation
-==========
-Nous analyserons particulièrement les critères suivants pour l'évaluation :
-* La lisibilité du code (peut-on comprendre facilement ce que vous avez fait)
-* Essais !!!
-* Performance
-* La beauté de ce que vous faites
+Then on the main file you will find the global function where i call all my helpers.
 
-Des détails
-=======
-S'il n'y a pas d'ouverture ou d'événement occupé pour une certaine fenêtre, cela signifie que l'entreprise n'est pas disponible.
+## What I change
+
+I juste change the date object in the **main.js**.
+With node 17 I haved some issues because this return an error with the double zero.
+
+```
+new Date(2016, 6, 1, 14, 00);
+```
+
+So i change to be sure that is working on every version (I juste delete a zero)
+
+```
+new Date(2016, 6, 1, 14, 0);
+```
