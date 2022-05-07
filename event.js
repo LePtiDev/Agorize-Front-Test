@@ -1,4 +1,9 @@
-import { checkIfIsOpen, checkIfIsAvailable } from "./functions/eventHelpers.js";
+import {
+  checkIfIsOpen,
+  checkIfIsAvailable,
+  getAvailabilities,
+} from "./functions/eventHelpers.js";
+
 var eventList = [];
 
 var Event = function (opening, recurring, startDate, endDate) {
@@ -12,14 +17,18 @@ var Event = function (opening, recurring, startDate, endDate) {
 Event.prototype.availabilities = function (fromDate, toDate) {
   // Check if open
   if (checkIfIsOpen(eventList, fromDate, toDate)) {
-    console.log("The compagny is open");
+    // Check if as already an event
     if (checkIfIsAvailable(eventList, fromDate, toDate)) {
-      console.log("The compagny is available");
+      new Event(false, false, fromDate, toDate); // Intervention scheduled
+      console.log("I'm available I add the event !");
     } else {
-      console.log("The compagny is not available");
+      // Get the next availabilities
+      getAvailabilities(eventList, fromDate, toDate);
+      console.log("I'm not available any other time !");
     }
   } else {
-    console.log("The compagny is close");
+    getAvailabilities(eventList, fromDate, toDate);
+    console.log("I'm not available any other time !");
   }
   return; //Something awesome;
 };

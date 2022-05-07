@@ -37,7 +37,49 @@ export function checkIfIsAvailable(eventList, fromDate, toDate) {
   const planning = eventList.find((event) => event.opening === true);
   const events = eventList.filter((event) => event.opening === false);
 
-  console.log(events);
+  events.forEach((element) => {
+    if (
+      (element.startDate.getTime() <= fromDate.getTime() ||
+        element.endDate.getTime() >= fromDate.getTime()) &&
+      (element.startDate.getTime() >= toDate.getTime() ||
+        element.endDate.getTime() <= fromDate.getTime())
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+}
+
+export function getAvailabilities(eventList, fromDate, toDate) {
+  // Planing
+  const planning = eventList.find((el) => el.opening === true);
+  const planningStartDate = planning.startDate;
+  const planningEndDate = planning.endDate;
+  const answer = "I'm available from";
+  let dateAvaibilities = planningStartDate;
+  let hours = [];
+
+  // Get the available week
+  while (dateAvaibilities.getTime() < fromDate.getTime()) {
+    dateAvaibilities = new Date(
+      dateAvaibilities.getTime() + 7 * 24 * 60 * 60 * 1000
+    );
+  }
+
+  planningEndDate.setDate(dateAvaibilities.getDate());
+
+  while (dateAvaibilities.getTime() < planningEndDate.getTime()) {
+    // Push in to array all min that we have
+    hours.push(getDateBy_HH_MM(dateAvaibilities));
+    // Add 30 min every loop
+    dateAvaibilities = new Date(
+      dateAvaibilities.setMinutes(dateAvaibilities.getMinutes() + 30)
+    );
+  }
+
+  hours[hours.length - 1] = "and " + hours[hours.length - 1];
+  console.log(answer + " " + hours.join(", "));
 }
 
 //======================================================================= Internal functions

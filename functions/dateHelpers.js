@@ -1,20 +1,20 @@
 export function getDateBy_HH_MM(date) {
-  return date.getTime();
+  return date.toLocaleTimeString("fr", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 }
 
 // Return true if the date are between the startDate and endDate
 export function checkBetweenTimes(startDate, endDate, fromDate, toDate) {
   return (
-    getDateBy_HH_MM(startDate) <= getDateBy_HH_MM(fromDate) &&
-    getDateBy_HH_MM(endDate) >= getDateBy_HH_MM(toDate)
+    startDate.getTime() <= fromDate.getTime() &&
+    endDate.getTime() >= toDate.getTime()
   );
 }
 
-export function checkBetweenDays(startPlanning, endPlanning, fromDate, toDate) {
-  return (
-    startPlanning.getDay() <= fromDate.getDay() &&
-    endPlanning.getDay() >= toDate.getDay()
-  );
+export function checkBetweenDays(start, end, fromDate, toDate) {
+  return start.getDay() <= fromDate.getDay() && end.getDay() >= toDate.getDay();
 }
 
 // Return true if the date are equals
